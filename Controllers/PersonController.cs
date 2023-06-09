@@ -12,6 +12,8 @@ namespace HeatMaps.Controllers
         }
 
         //Check If API is up
+        [HttpGet]
+        [Route("API")]
         public IActionResult Index()
         {
             return StatusCode(200);

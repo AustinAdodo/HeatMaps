@@ -13,36 +13,5 @@ namespace HeatMaps
         public const string Route6 = "/get/:date";
         public const string Route7 = "/get/:id";
         public const string Route8 = "/delete";
-        public static List<Sale> TempSalesRecords()
-        {
-            List<Sale> records = new List<Sale> {
-            new Sale {SalesId = "xyz",Discription= "Tissue", Amount = 2.12,Date = DateTime.Parse("21-11-22"),id = 1, Time =TimeOnly.Parse("09:22:12")},
-             new Sale {SalesId = "xyz",Discription= "Tissue", Amount = 2.12,Date = DateTime.Parse("21-11-22"),id = 1, Time =TimeOnly.Parse("09:22:12")},
-              new Sale {SalesId = "xyz",Discription= "Tissue", Amount = 2.12,Date = DateTime.Parse("21-11-22"),id = 1, Time =TimeOnly.Parse("09:22:12")},
-               new Sale {SalesId = "xyz",Discription= "Tissue", Amount = 2.12,Date = DateTime.Parse("21-11-22"),id = 1, Time =TimeOnly.Parse("09:22:12")},
-                new Sale {SalesId = "xyz",Discription= "Tissue", Amount = 2.12,Date = DateTime.Parse("21-11-22"),id = 1, Time =TimeOnly.Parse("09:22:12")},
-                 new Sale {SalesId = "xyz",Discription= "Tissue", Amount = 2.12,Date = DateTime.Parse("21-11-22"),id = 1, Time =TimeOnly.Parse("09:22:12")},
-                  new Sale {SalesId = "xyz",Discription= "Tissue", Amount = 2.12,Date = DateTime.Parse("21-11-22"),id = 1, Time =TimeOnly.Parse("09:22:12")},
-                   new Sale {SalesId = "xyz",Discription= "Tissue", Amount = 2.12,Date = DateTime.Parse("21-11-22"),id = 1, Time =TimeOnly.Parse("09:22:12")},
-                    new Sale {SalesId = "xyz",Discription= "Tissue", Amount = 2.12,Date = DateTime.Parse("21-11-22"),id = 1, Time =TimeOnly.Parse("09:22:12")},
-                     new Sale {SalesId = "xyz",Discription= "Tissue", Amount = 2.12,Date = DateTime.Parse("21-11-22"),id = 1, Time =TimeOnly.Parse("09:22:12")},
-                      new Sale {SalesId = "xyz",Discription= "Tissue", Amount = 2.12,Date = DateTime.Parse("21-11-22"),id = 1, Time =TimeOnly.Parse("09:22:12")},
-                       new Sale {SalesId = "xyz",Discription= "Tissue", Amount = 2.12,Date = DateTime.Parse("21-11-22"),id = 1, Time =TimeOnly.Parse("09:22:12")},
-                        new Sale {SalesId = "xyz",Discription= "Tissue", Amount = 2.12,Date = DateTime.Parse("21-11-22"),id = 1, Time =TimeOnly.Parse("09:22:12")},
-                         new Sale {SalesId = "xyz",Discription= "Tissue", Amount = 2.12,Date = DateTime.Parse("21-11-22"),id = 1, Time =TimeOnly.Parse("09:22:12")},
-                          new Sale {SalesId = "xyz",Discription= "Tissue", Amount = 2.12,Date = DateTime.Parse("21-11-22"),id = 1, Time =TimeOnly.Parse("09:22:12")},
-                           new Sale {SalesId = "xyz",Discription= "Tissue", Amount = 2.12,Date = DateTime.Parse("21-11-22"),id = 1, Time =TimeOnly.Parse("09:22:12")},
-                            new Sale {SalesId = "xyz",Discription= "Tissue", Amount = 2.12,Date = DateTime.Parse("21-11-22"),id = 1, Time =TimeOnly.Parse("09:22:12")},
-                             new Sale {SalesId = "xyz",Discription= "Tissue", Amount = 2.12,Date = DateTime.Parse("21-11-22"),id = 1, Time =TimeOnly.Parse("09:22:12")},
-                              new Sale {SalesId = "xyz",Discription= "Tissue", Amount = 2.12,Date = DateTime.Parse("21-11-22"),id = 1, Time =TimeOnly.Parse("09:22:12")},
-                               new Sale {SalesId = "xyz",Discription= "Tissue", Amount = 2.12,Date = DateTime.Parse("21-11-22"),id = 1, Time =TimeOnly.Parse("09:22:12")},
-                                new Sale {SalesId = "xyz",Discription= "Tissue", Amount = 2.12,Date = DateTime.Parse("21-11-22"),id = 1, Time =TimeOnly.Parse("09:22:12")},
-                                 new Sale {SalesId = "xyz",Discription= "Tissue", Amount = 2.12,Date = DateTime.Parse("21-11-22"),id = 1, Time =TimeOnly.Parse("09:22:12")},
-                                  new Sale {SalesId = "xyz",Discription= "Tissue", Amount = 2.12,Date = DateTime.Parse("21-11-22"),id = 1, Time =TimeOnly.Parse("09:22:12")},
-                                   new Sale {SalesId = "xyz",Discription= "Tissue", Amount = 2.12,Date = DateTime.Parse("21-11-22"),id = 1, Time =TimeOnly.Parse("09:22:12")},
-                                    new Sale {SalesId = "xyz",Discription= "Tissue", Amount = 2.12,Date = DateTime.Parse("21-11-22"),id = 1, Time =TimeOnly.Parse("09:22:12")},
-            };
-            return records;
-        }
     }
 }

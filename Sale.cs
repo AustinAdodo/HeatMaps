@@ -14,7 +14,7 @@ namespace HeatMaps
         public double SumTotal { get { return Amount * Quantity; } }
         public string? Discription { get; set; }
         public DateTime Date { get; set; }
-        public TimeOnly Time { get; set; }
+        public TimeSpan Time { get; set; }
 
     }
 }

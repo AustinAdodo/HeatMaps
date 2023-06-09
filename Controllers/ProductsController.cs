@@ -4,20 +4,34 @@ namespace HeatMaps.Controllers
 {
     public class ProductsController : Controller
     {
-        public readonly ILogger _logger;
+        //public readonly ILogger<Product> _logger;
         public readonly ApplicationDbContext _ProductsContext;
 
-        public ProductsController(ILogger logger, ApplicationDbContext productsContext)
+        public ProductsController(ApplicationDbContext productsContext)
         {
-            _logger = logger;
+            //_logger = logger;
             _ProductsContext = productsContext;
         }
 
-        [HttpGet(Name = "GetAllProducts")]
-        public JsonResult Index()
+        [HttpGet]
+        [Route("api/products")]
+        public IActionResult GetAll()
         {
-            var Products = new List<Product>();
-            return Json(Products);
+            var Products = _ProductsContext.Products.ToList();
+            if (Products != null) return Json(Products);
+            var result = Enumerable.Empty<Product>();
+            return Json(result);
+        }
+
+
+        [HttpGet("{id}")]
+        [Route("api/products/:id")]
+        public ActionResult<Product> GetAProduct(int id)
+        {
+            var Product = _ProductsContext.Products.Where(a => a.id == id).First();
+            if (Product != null) return Json(Product);
+            var result = Enumerable.Empty<Product>();
+            return Json(result);
         }
     }
 }
