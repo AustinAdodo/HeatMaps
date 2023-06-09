@@ -8,7 +8,7 @@ namespace HeatMaps.Controllers
     public class ProductsController : Controller
     {
         //public readonly ILogger<Product> _logger;
-        public readonly IProductService _ProductsService;
+        private readonly IProductService _ProductsService;
 
         public ProductsController(IProductService productsService)
         {
@@ -20,21 +20,21 @@ namespace HeatMaps.Controllers
         public IActionResult GetAll()
         {
             var products = _ProductsService.GetAll();
-            return Json(products);
+            return Json(products.Result);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public ActionResult<Product> GetAProduct(int id)
         {
             var product = _ProductsService.Get(id);
-            return Json(product);
+            return Json(product.Result);
         }
 
-        //[HttpGet("{ProductId}")]
-        //public ActionResult<Product> GetAProduct(string ProductId)
-        //{
-        //    var product = _ProductsService.Get(ProductId);
-        //    return Json(product);
-        //}
+        [HttpGet("ByProductId/{productId}")]
+        public ActionResult<Product> GetPdusingProductId(string ProductId)
+        {
+            var product = _ProductsService.Get(ProductId);
+            return Json(product.Result);
+        }
     }
 }

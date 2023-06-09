@@ -4,7 +4,7 @@ namespace HeatMaps.Utilities.Products
 {
     public class ProductService : IProductService
     {
-        public readonly ApplicationDbContext _productsContext;
+        private readonly ApplicationDbContext _productsContext;
         public ProductService(ApplicationDbContext productsContext)
         {
             _productsContext = productsContext;
@@ -19,7 +19,7 @@ namespace HeatMaps.Utilities.Products
 
         async Task<Product> IProductService.Get(string ProductId)
         {
-            var Product = await _productsContext.Products.FindAsync(ProductId);
+            var Product = await _productsContext.Products.Where(a => a.ProductId == ProductId).FirstAsync();
             if (Product != null) return Product;
             var result = Enumerable.Empty<Product>().ToList().First();
             return result;

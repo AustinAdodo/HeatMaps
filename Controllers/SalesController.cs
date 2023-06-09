@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 namespace HeatMaps.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class SalesController : Controller
     {
         public readonly ILogger _logger;
@@ -25,7 +27,7 @@ namespace HeatMaps.Controllers
         [Route(Preferences.Route5)]
         public IActionResult GetAllSales()
         {
-            if (_SalesContext != null)  return StatusCode(200);
+            if (_SalesContext != null)  return Ok(200);
             var result = Enumerable.Empty<Sale>();
             return NotFound(result);
         }
