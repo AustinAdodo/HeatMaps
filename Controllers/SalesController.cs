@@ -18,16 +18,34 @@ namespace HeatMaps.Controllers
         }
 
         //Check If API is up
-        public IActionResult Index()
+        //public IActionResult Index()
+        //{
+        //    return StatusCode(200);
+        //}
+
+        //GET all sales
+
+        [HttpGet]
+        public async Task<IActionResult> GetSales([FromQuery] int pageNumber = 1)
         {
-            return StatusCode(200);
+            try
+            {
+                var sales = await _salesService.GetAll(pageNumber);
+
+                return Json(sales);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while retrieving sales.");
+                return StatusCode(500, "Got in here but we have Internal server error, please try again later.");
+            }
         }
 
-        //return all sales
-        [HttpGet]
-        public IActionResult GetAllSales()
+        //Get All Dates
+        [HttpGet("dates")]
+        public IActionResult GetDates()
         {
-            return Json(_salesService.GetAll().Result);
+            return Json(_salesService.GetDates().Result);
         }
 
         //Get sale(id)
@@ -50,10 +68,10 @@ namespace HeatMaps.Controllers
         //Get sale(date)
         [HttpGet]
         [Route(Preferences.Route6)]
-        public IActionResult GetSalesOnthisDate(string date)
+        public IActionResult GetSalesOnthisDate(DateTime date)
         {
-            var SalesforDate = _salesService.GetAll().Result.Where(a=>a.Date == DateTime.Parse(date));
-            return Json(SalesforDate);
+            var SalesforDate = _salesService.GetSalesOnDate(date);
+            return Json(SalesforDate.Result);
         }
 
         //Add Sale

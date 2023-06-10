@@ -13,5 +13,6 @@ namespace HeatMaps
         public const string Route6 = "salesondate/{date}";
         public const string Route7 = "bysaleid/{saleId}";
         public const string Route8 = "/delete";
+        public const int PageSize = 15;
     }
 }

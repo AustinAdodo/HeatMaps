@@ -38,20 +38,28 @@ namespace HeatMaps.Utilities.Sales
             return result;
         }
 
-        public async Task<List<Sale>> GetAll()
+        public async Task<List<Sale>> GetAll(int pageNumber)
         {
-            var All = await _salesContext.Sales.ToListAsync();
-            if (All != null) return All;
-            var result = Enumerable.Empty<Sale>().ToList();
-            return result;
+            int pageSize = Preferences.PageSize;
+            var All = await _salesContext.Sales
+                              .Skip((pageNumber - 1) * pageSize)
+                              .Take(pageSize)
+                              .ToListAsync();
+            return All ?? Enumerable.Empty<Sale>().ToList();
         }
 
         public async Task<List<DateTime>> GetDates()
         {
-            var dates = await _salesContext.Sales.Select(a => a.Date).ToListAsync();
-            if(dates!=null)return dates;
-            dates = Enumerable.Empty<DateTime>().ToList();
-            return dates;
+            var dates = await _salesContext.Sales.Select(a => a.Date.Date).ToListAsync();
+            return dates ?? Enumerable.Empty<DateTime>().ToList();
+        }
+
+        public async Task<List<Sale>> GetSalesOnDate(DateTime date)
+        {
+            // Normalize the time component to midnight
+            DateTime normalizedDate = date.Date;
+            var sales = await _salesContext.Sales.Where(a => a.Date.Date == normalizedDate).ToListAsync();
+            return sales ?? Enumerable.Empty<Sale>().ToList();
         }
 
         public async void Update(int id, Sale newDetails)

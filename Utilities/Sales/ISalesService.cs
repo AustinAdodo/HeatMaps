@@ -2,7 +2,8 @@
 {
     public interface ISalesService
     {
-        public Task<List<Sale>> GetAll();
+        public Task<List<Sale>> GetAll(int pageNumber);
+        public Task<List<Sale>> GetSalesOnDate(DateTime date);
         public Task<List<DateTime>> GetDates();
         public Task<Sale> Get(int id);
         public Task<Sale> Get(string SaleId);
