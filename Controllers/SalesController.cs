@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using HeatMaps.Utilities.Sales;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
 namespace HeatMaps.Controllers
@@ -8,12 +9,12 @@ namespace HeatMaps.Controllers
     public class SalesController : Controller
     {
         public readonly ILogger _logger;
-        public readonly ApplicationDbContext _SalesContext;
-    
-        public SalesController(ILogger<PersonController> logger, ApplicationDbContext salesContext)
+        public readonly ISalesService _salesService;
+
+        public SalesController(ILogger<PersonController> logger, ISalesService salesService)
         {
             _logger = logger;
-            _SalesContext = salesContext;
+            _salesService = salesService;
         }
 
         //Check If API is up
@@ -24,12 +25,17 @@ namespace HeatMaps.Controllers
 
         //return all sales
         [HttpGet]
-        [Route(Preferences.Route5)]
         public IActionResult GetAllSales()
         {
-            if (_SalesContext != null)  return Ok(200);
-            var result = Enumerable.Empty<Sale>();
-            return NotFound(result);
+            return Json(_salesService.GetAll().Result);
+        }
+
+        //Get sale(id)
+        [HttpGet("{id:int}")]
+        public IActionResult GetSpecificProductSale(int id)
+        {
+            var result = _salesService.Get(id);
+            return Json(result.Result);
         }
 
         //Get sale(id)
@@ -37,15 +43,17 @@ namespace HeatMaps.Controllers
         [Route(Preferences.Route7)]
         public IActionResult GetSpecificProductSale(string Saleid)
         {
-            return StatusCode(200);
+            var result = _salesService.Get(Saleid);
+            return Json(result.Result);
         }
 
         //Get sale(date)
         [HttpGet]
         [Route(Preferences.Route6)]
-        public IActionResult GetSpecificProductSale(DateTime date)
+        public IActionResult GetSalesOnthisDate(string date)
         {
-            return StatusCode(200);
+            var SalesforDate = _salesService.GetAll().Result.Where(a=>a.Date == DateTime.Parse(date));
+            return Json(SalesforDate);
         }
 
         //Add Sale
@@ -70,7 +78,7 @@ namespace HeatMaps.Controllers
         //Update Sale
         [HttpPut]
         [Route(Preferences.Route2)]
-        public IActionResult EditSale(Guid SaleId, CancellationToken token)
+        public IActionResult Update(Guid SaleId, CancellationToken token)
         {
             return Ok(200);
         }

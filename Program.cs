@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using HeatMaps.Utilities.Products;
+using HeatMaps.Utilities.Sales;
 
 namespace HeatMaps
 {
@@ -19,13 +20,7 @@ namespace HeatMaps
             builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("ProductsDBConnection")));
             builder.Services.AddScoped<IProductService, ProductService>();
-
-            // Configure the HTTP request pipeline.
-            //app.MapGet("/", async (MyService myService, HttpContext context) =>
-            //{
-            //    // Use the injected service
-            //    await context.Response.WriteAsync(myService.DoSomething());
-            //});
+            builder.Services.AddScoped<ISalesService, SalesService>();
 
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -34,6 +29,11 @@ namespace HeatMaps
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
+            //app.MapGet("/", async (MyService myService, HttpContext context) =>
+            //{
+            //    // Use the injected service
+            //    await context.Response.WriteAsync(myService.DoSomething());
+            //});
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();

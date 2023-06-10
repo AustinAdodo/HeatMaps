@@ -10,8 +10,8 @@ namespace HeatMaps
         public const string Route3 = "/delete";
         public const string Route4 = "/add";
         public const string Route5 = "/get";
-        public const string Route6 = "/get/:date";
-        public const string Route7 = "/get/:id";
+        public const string Route6 = "salesondate/{date}";
+        public const string Route7 = "bysaleid/{saleId}";
         public const string Route8 = "/delete";
     }
 }

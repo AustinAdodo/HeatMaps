@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace HeatMaps.Utilities.Products
 {
@@ -35,13 +36,15 @@ namespace HeatMaps.Utilities.Products
 
         async void IProductService.Update(int id, Product newProductDetails)
         {
-            var Product = await _productsContext.Products.FindAsync(id);
-            if (Product != null)
+            var result = await _productsContext.Products.FindAsync(id);
+            if (result != null)
             {
-                Product.Name = newProductDetails.Name;
-                Product.Description = newProductDetails.Description;
-                var result = _productsContext.Products.Attach(Product);
-                result.State = EntityState.Modified;
+                foreach (PropertyInfo prty in typeof(Product).GetProperties())
+                {
+                    prty.SetValue(result, prty.GetValue(newProductDetails));
+                }
+                _productsContext.Products.Attach(result);
+                _productsContext.Entry(result).State = EntityState.Modified;
             }
             await _productsContext.SaveChangesAsync();
         }
