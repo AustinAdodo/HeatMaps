@@ -17,12 +17,6 @@ namespace HeatMaps.Controllers
             _salesService = salesService;
         }
 
-        //Check If API is up
-        //public IActionResult Index()
-        //{
-        //    return StatusCode(200);
-        //}
-
         //GET all sales
         [HttpGet]
         public async Task<IActionResult> GetSales([FromQuery] int pageNumber = 1)
@@ -35,8 +29,8 @@ namespace HeatMaps.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while retrieving sales.");
-                //return StatusCode(500, "Got in here but we have Internal server error, please try again later.");
-                throw;
+                return StatusCode(500, "Got in here but we have Internal server error, please try again later.");
+                //throw;
             }
         }
 

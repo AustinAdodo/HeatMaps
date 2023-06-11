@@ -41,18 +41,20 @@ namespace HeatMaps.Utilities.Sales
         public async Task<List<Sale>> GetAll(int pageNumber)
         {
             int pageSize = Preferences.PageSize;
-            //var All = await _salesContext.Sales.OrderBy(a => a.id).Skip(5).Take(pageSize).ToListAsync();
-            var All = await _salesContext.Sales.Where(a => a.id > 0).OrderBy(a => a.id).Take(25).ToListAsync();
-            //var All = await _salesContext.Sales.OrderBy(a=>a.id)
-            //                  .Where(a => a.id > (pageNumber - 1) * pageSize)
-            //                  .Take(pageSize)
-            //                  .ToListAsync();
-            return All ?? Enumerable.Empty<Sale>().ToList();
+
+            var All = await _salesContext.Sales.OrderBy(a => a.id).Where(a => a.id > (pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
+            List<Sale> result = new List<Sale>();
+            foreach (var item in All)
+            {
+                if (item.Amount != 0)
+                result.Add(item);
+            }
+            return result ?? Enumerable.Empty<Sale>().ToList();
         }
 
         public async Task<List<DateTime>> GetDates()
         {
-            var dates = await _salesContext.Sales.Select(a => a.Date.Date).ToListAsync();
+            var dates = await _salesContext.Sales.Select(a => a.Date.Date).Distinct().ToListAsync();
             return dates ?? Enumerable.Empty<DateTime>().ToList();
         }
 
