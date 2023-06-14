@@ -29,8 +29,8 @@ namespace HeatMaps.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while retrieving sales.");
-                return StatusCode(500, "Got in here but we have Internal server error, please try again later.");
-                //throw;
+                //return StatusCode(500, "Got in here but we have Internal server error, please try again later.");
+                throw;
             }
         }
 
