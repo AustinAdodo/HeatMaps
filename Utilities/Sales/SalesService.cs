@@ -67,7 +67,10 @@ namespace HeatMaps.Utilities.Sales
             {
                 foreach (PropertyInfo prty in typeof(Sale).GetProperties())
                 {
-                    prty.SetValue(result, prty.GetValue(newDetails));
+                    if (prty.GetValue(newDetails) != null)
+                    {
+                        prty.SetValue(result, prty.GetValue(newDetails));
+                    }
                 }
                 _salesContext.Sales.Attach(result);
                 _salesContext.Entry(result).State = EntityState.Modified;

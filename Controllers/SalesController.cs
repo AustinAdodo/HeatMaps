@@ -29,8 +29,7 @@ namespace HeatMaps.Controllers
             catch (Exception ex)
             {
                 _logger.LogError(ex, "An error occurred while retrieving sales.");
-                //return StatusCode(500, "Got in here but we have Internal server error, please try again later.");
-                throw;
+                return StatusCode(500, "Got in here but we have an Internal server error, please try again later.");
             }
         }
 
@@ -87,9 +86,9 @@ namespace HeatMaps.Controllers
         }
 
         //Update Sale
-        [HttpPut]
+        [HttpPut("{id:int}")]
         [Route(Preferences.Route2)]
-        public IActionResult Update(Guid SaleId, CancellationToken token)
+        public IActionResult Update(int id, [FromBody] Sale details,CancellationToken token)
         {
             return Ok(200);
         }
