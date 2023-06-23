@@ -69,12 +69,10 @@ namespace HeatMaps.Controllers
         //Add Sale
         [HttpPost]
         [Route(Preferences.Route4)]
-        public IActionResult AddSale([FromBody] List<Product> Products, CancellationToken token)
+        public IActionResult AddSale([FromBody] Sale sale, CancellationToken token)
         {
-            Guid SaleId = Guid.NewGuid();
-            Dictionary<Guid, List<Product>> Result = new Dictionary<Guid, List<Product>>();
-            Result[SaleId] = Products;
-            return Ok(Result);
+            _salesService.Add(sale);
+            return Ok("Sale Added");
         }
 
         //Delete Sale
