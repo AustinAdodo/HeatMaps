@@ -17,12 +17,12 @@ namespace HeatMaps.Utilities.Sales
             throw new NotImplementedException();
         }
 
-        public void Delete(int id)
+        public void Delete(int id, CancellationToken Token)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException(Token.ToString());
         }
 
-        public async Task<Sale> Get(int id)
+        public async Task<Sale> Get(int id, CancellationToken Token)
         {
             var Product = await _salesContext.Sales.FindAsync(id);
             if (Product != null) return Product;
@@ -38,11 +38,11 @@ namespace HeatMaps.Utilities.Sales
             return result;
         }
 
-        public async Task<List<Sale>> GetAll(int pageNumber)
+        public async Task<List<Sale>> GetAll(int pageNumber, CancellationToken Token)
         {
             int pageSize = Preferences.PageSize;
             var All = await _salesContext.Sales.OrderBy(a => a.id).Where(a => a.id > (pageNumber - 1) * pageSize && a.Amount != 0)
-                .Take(pageSize).ToListAsync();
+                .Take(pageSize).ToListAsync(Token);
             return All ?? Enumerable.Empty<Sale>().ToList();
         }
 
