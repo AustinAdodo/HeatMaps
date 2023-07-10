@@ -1,6 +1,6 @@
 ﻿using HeatMaps.Utilities.Sales;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+
 
 namespace HeatMaps.Controllers
 {
